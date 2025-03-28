@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aldon - the EM Specialist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #output-box {
+            width: 80%;
+            height: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 20px auto;
+            overflow-y: auto; /* Makes it scrollable */
+            background: #f9f9f9;
+            text-align: left;
+        }
+        input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aldon - the EM Specialist</h1>
+    <input type="text" id="user-input" placeholder="Enter text here">
+    <button onclick="processText()">Submit</button>
+    <div id="output-box"></div>
+
+    <script>
+        function processText() {
+            let userInput = document.getElementById("user-input").value;
+            if (!userInput) return; // Don't send empty input
+
+            fetch('/api/process-text', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                appendMessage(data.output); // Display processed text
+            })
+            .catch(error => console.error("Error:", error));
+
+            // Clear input field after submission
+            document.getElementById("user-input").value = "";
+        }
+
+        function appendMessage(message) {
+            let outputBox = document.getElementById("output-box");
+            let p = document.createElement("p");
+            p.textContent = message;
+            outputBox.appendChild(p);
+            outputBox.scrollTop = outputBox.scrollHeight; // Auto-scroll to latest
+        }
+
+        // Listen for the Enter key press in the input field
+        document.getElementById("user-input").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                processText();
+            }
+        });
+    </script>
+</body>
+
+</html>
