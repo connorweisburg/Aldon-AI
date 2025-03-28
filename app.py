@@ -11,8 +11,8 @@ client = openai.OpenAI(api_key=openai_api_key)
 ASSISTANT_ID = "asst_eGaU51vpRsSfGvMGGjbd7KUb"
 
 @app.route('/')
-def home():
-    return "Flask App Running on Vercel!"
+def serve_frontend():
+    return open("index.html").read()
 
 @app.route('/api/process-text', methods=['POST'])
 def process_text():
