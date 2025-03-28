@@ -6,9 +6,9 @@ import time
 app = Flask(__name__)
 
 # Load API key from environment variable
-openai_api_key = os.getenv("OPENAI_API_KEY")
+# openai_api_key = os.getenv("OPENAI_API_KEY")
 client = openai.OpenAI(api_key=openai_api_key)
-ASSISTANT_ID = "asst_eGaU51vpRsSfGvMGGjbd7KUb"
+# ASSISTANT_ID = "asst_eGaU51vpRsSfGvMGGjbd7KUb"
 
 @app.route('/')
 def serve_frontend():
@@ -56,5 +56,5 @@ def process_text():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
