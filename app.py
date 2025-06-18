@@ -6,7 +6,7 @@ import time
 app = Flask(__name__)
 
 # Load API key from environment variable
-# openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 client = openai.OpenAI(api_key=openai_api_key)
 # ASSISTANT_ID = "asst_eGaU51vpRsSfGvMGGjbd7KUb"
 
